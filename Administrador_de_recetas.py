@@ -4,12 +4,12 @@ from os import system
 
 total_de_recetas = 0
 
-print("Bienvenido al administrador de recetas\n")
+print("Bienvenido al administrador de recetas")
 
 #Todas las carpetas y archivos que vayamos creando se almacenan en esta ruta
 carpeta_base = Path(Path.home(), "Recetas")
 
-print("Todas las categorías y recetas que vayas creando se almacenan en la siguiente ruta: ", carpeta_base)
+print("\nTodas las categorías y recetas que vayas creando se almacenan en la siguiente ruta: ", carpeta_base, "\n")
 
 #Con este for recorremos todas las sub carpetas de la carpeta base y buscamos todos los archivos txt hay
 for txt in Path(carpeta_base).glob("**/*.txt"):
@@ -22,9 +22,10 @@ print(f"\nLa cantidad de recetas almancenadas (entre todas las categorías) es d
 def menu_principal(carpeta_base1):
 
     opcion_del_menu = 0
+    categoria_ingresada = ""
 
     while opcion_del_menu != 6:
-        print("Opciones del menú\n"
+        print("Opciones del menú:\n"
               "1. Leer recetas\n"
               "2. Crear receta\n"
               "3. Crear categoría\n"
@@ -36,13 +37,18 @@ def menu_principal(carpeta_base1):
         try:
             opcion_ingresada = int(input("Elige la opción que desees: "))
         except:
-            print("Has ingresado un valor no valido. Favor de ingresar una opción valida.\n")
             system("cls")
+            print("Has ingresado un valor no valido. Favor de ingresar una opción valida.\n")
             opcion_ingresada = 0
 
         #Mediante los siguientes IFs iremos accediendo a las distintas opciones del menú
         if opcion_ingresada == 1:
             mostrar_categorias(carpeta_base1)
+            categoria_ingresada = input("Ingresa el nombre de la categoría: ")
+            nueva_ruta2 = mostrar_recetas(carpeta_base1, categoria_ingresada)
+            receta = input("Ingresa la receta que deseas ver (sin la extensión del archivo): ")
+            receta_seleccionada = receta + ".txt"
+            mostrar_receta_seleccionada(nueva_ruta2, receta_seleccionada)
         elif opcion_ingresada == 2:
             print("Lo sentimos esa opcion aun no esta disponible :(")
             system("cls")
@@ -71,6 +77,25 @@ def mostrar_categorias(carpeta_base2):
         print(hijo)
 
     print("\n")
+
+def mostrar_recetas(carpeta_base3, categoria_ingresada):
+    nueva_ruta = Path(carpeta_base3, categoria_ingresada)
+
+    for archivo in nueva_ruta.glob("*.txt"):
+        print(archivo)
+
+    return nueva_ruta
+
+def mostrar_receta_seleccionada(nueva_ruta3, receta):
+    mostrar_receta = Path(nueva_ruta3, receta)
+    print(mostrar_receta.read_text())
+
+    salir = "n"
+
+    while salir != "s":
+        salir = input("Favor de ingresar la letra 's' para volver al menú: ")
+
+    system("cls")
 
 
 #Aqui se mandan a llamar las funciones
