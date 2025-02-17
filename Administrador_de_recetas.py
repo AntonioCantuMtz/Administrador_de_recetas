@@ -1,5 +1,6 @@
 #Proyecto 'administrador de recetas'
 from pathlib import Path
+from os import system
 
 total_de_recetas = 0
 
@@ -36,23 +37,29 @@ def menu_principal(carpeta_base1):
             opcion_ingresada = int(input("Elige la opción que desees: "))
         except:
             print("Has ingresado un valor no valido. Favor de ingresar una opción valida.\n")
+            system("cls")
             opcion_ingresada = 0
 
-        #Mediante los siguientes IFs iramos accediendo a las distintas opciones del menú
+        #Mediante los siguientes IFs iremos accediendo a las distintas opciones del menú
         if opcion_ingresada == 1:
             mostrar_categorias(carpeta_base1)
         elif opcion_ingresada == 2:
             print("Lo sentimos esa opcion aun no esta disponible :(")
+            system("cls")
         elif opcion_ingresada == 3:
             print("Lo sentimos esa opcion aun no esta disponible :(")
+            system("cls")
         elif opcion_ingresada == 4:
             print("Lo sentimos esa opcion aun no esta disponible :(")
+            system("cls")
         elif opcion_ingresada == 5:
             print("Lo sentimos esa opcion aun no esta disponible :(")
+            system("cls")
         elif opcion_ingresada == 6:
             return "Programa finalizado..."
         else:
             print("Esa opcion no existe. Favor de ingresar una opción valida.\n")
+            system("cls")
 
 
 
@@ -62,6 +69,8 @@ def mostrar_categorias(carpeta_base2):
     #La funcion iterdir() imprime todas las carpetas hijo de la ruta principal <3
     for hijo in carpeta_base2.iterdir():
         print(hijo)
+
+    print("\n")
 
 
 #Aqui se mandan a llamar las funciones
