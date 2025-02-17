@@ -2,7 +2,6 @@
 from pathlib import Path
 
 total_de_recetas = 0
-opciones_del_menu = 0
 
 print("Bienvenido al administrador de recetas\n")
 
@@ -19,8 +18,11 @@ print(f"\nLa cantidad de recetas almancenadas (entre todas las categorías) es d
 
 #Esta funcion es el menu principal del programa y realiza una tarea determinada
 #dependiendo de la opcion ingresada por el usuario
-def menu_principal(opcion_ingresada):
-    while opcion_ingresada != 6:
+def menu_principal(carpeta_base1):
+
+    opcion_del_menu = 0
+
+    while opcion_del_menu != 6:
         print("Opciones del menú\n"
               "1. Leer recetas\n"
               "2. Crear receta\n"
@@ -29,16 +31,41 @@ def menu_principal(opcion_ingresada):
               "5. Eliminar categoría\n"
               "6. Finalizar programa\n")
 
+        #Aqui evaluamos si lo que ingresa el usuario es un numero o no
         try:
             opcion_ingresada = int(input("Elige la opción que desees: "))
         except:
             print("Has ingresado un valor no valido. Favor de ingresar una opción valida.\n")
             opcion_ingresada = 0
 
-    return "Programa finalizado..."
+        #Mediante los siguientes IFs iramos accediendo a las distintas opciones del menú
+        if opcion_ingresada == 1:
+            mostrar_categorias(carpeta_base1)
+        elif opcion_ingresada == 2:
+            print("Lo sentimos esa opcion aun no esta disponible :(")
+        elif opcion_ingresada == 3:
+            print("Lo sentimos esa opcion aun no esta disponible :(")
+        elif opcion_ingresada == 4:
+            print("Lo sentimos esa opcion aun no esta disponible :(")
+        elif opcion_ingresada == 5:
+            print("Lo sentimos esa opcion aun no esta disponible :(")
+        elif opcion_ingresada == 6:
+            return "Programa finalizado..."
+        else:
+            print("Esa opcion no existe. Favor de ingresar una opción valida.\n")
 
 
-menu_principal(opciones_del_menu)
+
+def mostrar_categorias(carpeta_base2):
+    print("Todas las categorías:")
+
+    #La funcion iterdir() imprime todas las carpetas hijo de la ruta principal <3
+    for hijo in carpeta_base2.iterdir():
+        print(hijo)
+
+
+#Aqui se mandan a llamar las funciones
+menu_principal(carpeta_base)
 
 
 
