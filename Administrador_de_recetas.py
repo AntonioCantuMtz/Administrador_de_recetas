@@ -45,13 +45,16 @@ def menu_principal(carpeta_base1):
         if opcion_ingresada == 1:
             mostrar_categorias(carpeta_base1)
             categoria_ingresada = input("Ingresa el nombre de la categoría: ")
-            nueva_ruta2 = mostrar_recetas(carpeta_base1, categoria_ingresada)
+            nueva_ruta = mostrar_recetas(carpeta_base1, categoria_ingresada)
             receta = input("Ingresa la receta que deseas ver (sin la extensión del archivo): ")
             receta_seleccionada = receta + ".txt"
-            mostrar_receta_seleccionada(nueva_ruta2, receta_seleccionada)
+            leer_receta(nueva_ruta, receta_seleccionada)
+
         elif opcion_ingresada == 2:
-            print("Lo sentimos esa opcion aun no esta disponible :(")
-            system("cls")
+            mostrar_categorias(carpeta_base1)
+            categoria_ingresada = input("Ingresa el nombre de la categoría a la que pertenecerá la nueva receta: ")
+            crear_receta(carpeta_base1, categoria_ingresada)
+
         elif opcion_ingresada == 3:
             print("Lo sentimos esa opcion aun no esta disponible :(")
             system("cls")
@@ -67,27 +70,25 @@ def menu_principal(carpeta_base1):
             print("Esa opcion no existe. Favor de ingresar una opción valida.\n")
             system("cls")
 
-
-
-def mostrar_categorias(carpeta_base2):
+def mostrar_categorias(carpeta_base1):
     print("Todas las categorías:")
 
     #La funcion iterdir() imprime todas las carpetas hijo de la ruta principal <3
-    for hijo in carpeta_base2.iterdir():
+    for hijo in carpeta_base1.iterdir():
         print(hijo)
 
     print("\n")
 
-def mostrar_recetas(carpeta_base3, categoria_ingresada):
-    nueva_ruta = Path(carpeta_base3, categoria_ingresada)
+def mostrar_recetas(carpeta_base1, categoria_ingresada):
+    nueva_ruta = Path(carpeta_base1, categoria_ingresada)
 
     for archivo in nueva_ruta.glob("*.txt"):
         print(archivo)
 
     return nueva_ruta
 
-def mostrar_receta_seleccionada(nueva_ruta3, receta):
-    mostrar_receta = Path(nueva_ruta3, receta)
+def leer_receta(nueva_ruta, receta):
+    mostrar_receta = Path(nueva_ruta, receta)
     print(mostrar_receta.read_text())
 
     salir = "n"
@@ -96,6 +97,23 @@ def mostrar_receta_seleccionada(nueva_ruta3, receta):
         salir = input("Favor de ingresar la letra 's' para volver al menú: ")
 
     system("cls")
+
+#Con esta funcion no solo creamos el archivo sino que tambien le agregamos su contenido
+def crear_receta(carpeta_base1, categoria_ingresada):
+    nombre_receta = input("Ingresa el nombre de la receta: ")
+
+    receta_nueva = nombre_receta + ".txt"
+
+    nueva_ruta = Path(carpeta_base1, categoria_ingresada) / receta_nueva
+
+    #Con el metodo touch() creamos un nuevo archivo (en caso de que este no exista)
+    nueva_ruta.touch()
+
+    contenido_receta = input("Ingresa el contenido de la receta: ")
+
+    #Con el metodo write_text() le agreamos el contenido al archivo de texto
+    nueva_ruta.write_text(contenido_receta)
+
 
 
 #Aqui se mandan a llamar las funciones
