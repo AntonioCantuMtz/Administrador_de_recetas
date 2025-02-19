@@ -62,8 +62,12 @@ def menu_principal(carpeta_base1):
             crear_categoria(carpeta_base1)
 
         elif opcion_ingresada == 4:
-            print("Lo sentimos esa opcion aun no esta disponible :(")
+            mostrar_categorias(carpeta_base1)
+            categoria_ingresada = input("Ingresa el nombre de la categoría: ")
             system("cls")
+            mostrar_recetas(carpeta_base1, categoria_ingresada)
+            eliminar_receta(carpeta_base1, categoria_ingresada)
+
         elif opcion_ingresada == 5:
             print("Lo sentimos esa opcion aun no esta disponible :(")
             system("cls")
@@ -127,7 +131,17 @@ def crear_categoria(carpeta_base1):
 
     system("cls")
 
+def eliminar_receta(carpeta_base1, categoria_ingresada):
+    receta = input("Ingresa el nombre de la receta que deseas eliminar: ")
 
+    extension_receta = receta + ".txt"
+
+    receta_a_eliminar = Path(carpeta_base1, categoria_ingresada) / extension_receta
+
+    #Con el metodo unlink() eliminamos un archivo
+    receta_a_eliminar.unlink()
+
+    print("Receta eliminada con éxito.")
 
 #Aqui se mandan a llamar las funciones
 menu_principal(carpeta_base)
