@@ -22,7 +22,6 @@ print(f"\nLa cantidad de recetas almancenadas (entre todas las categorías) es d
 def menu_principal(carpeta_base1):
 
     opcion_del_menu = 0
-    categoria_ingresada = ""
 
     while opcion_del_menu != 6:
         print("Opciones del menú:\n"
@@ -43,6 +42,7 @@ def menu_principal(carpeta_base1):
 
         #Mediante los siguientes IFs iremos accediendo a las distintas opciones del menú
         if opcion_ingresada == 1:
+            system("cls")
             mostrar_categorias(carpeta_base1)
             categoria_ingresada = input("Ingresa el nombre de la categoría: ")
             nueva_ruta = mostrar_recetas(carpeta_base1, categoria_ingresada)
@@ -51,13 +51,16 @@ def menu_principal(carpeta_base1):
             leer_receta(nueva_ruta, receta_seleccionada)
 
         elif opcion_ingresada == 2:
+            system("cls")
             mostrar_categorias(carpeta_base1)
             categoria_ingresada = input("Ingresa el nombre de la categoría a la que pertenecerá la nueva receta: ")
             crear_receta(carpeta_base1, categoria_ingresada)
 
         elif opcion_ingresada == 3:
-            print("Lo sentimos esa opcion aun no esta disponible :(")
             system("cls")
+            mostrar_categorias(carpeta_base1)
+            crear_categoria(carpeta_base1)
+
         elif opcion_ingresada == 4:
             print("Lo sentimos esa opcion aun no esta disponible :(")
             system("cls")
@@ -113,6 +116,16 @@ def crear_receta(carpeta_base1, categoria_ingresada):
 
     #Con el metodo write_text() le agreamos el contenido al archivo de texto
     nueva_ruta.write_text(contenido_receta)
+
+def crear_categoria(carpeta_base1):
+    nombre_categoria = input("Ingresa el nombre de la nueva categoría: ")
+
+    nueva_categoria = Path(carpeta_base1) / nombre_categoria
+
+    #Con el metodo mkdir() creamos un nuevo directorio (o una nueva carpeta)
+    nueva_categoria.mkdir()
+
+    system("cls")
 
 
 
