@@ -69,10 +69,13 @@ def menu_principal(carpeta_base1):
             eliminar_receta(carpeta_base1, categoria_ingresada)
 
         elif opcion_ingresada == 5:
-            print("Lo sentimos esa opcion aun no esta disponible :(")
+            mostrar_categorias(carpeta_base1)
+            categoria_ingresada = input("Ingresa el nombre de la categoría: ")
             system("cls")
+            eliminar_categoria(carpeta_base1, categoria_ingresada)
+
         elif opcion_ingresada == 6:
-            return "Programa finalizado..."
+            return print("Programa finalizado...")
         else:
             print("Esa opcion no existe. Favor de ingresar una opción valida.\n")
             system("cls")
@@ -142,6 +145,26 @@ def eliminar_receta(carpeta_base1, categoria_ingresada):
     receta_a_eliminar.unlink()
 
     print("Receta eliminada con éxito.")
+
+def eliminar_categoria(carpeta_base1, categoria_ingresada):
+    categoria_a_eliminar = Path(carpeta_base1, categoria_ingresada)
+
+    confirmar = ""
+
+    while confirmar != "s" or confirmar != "n":
+
+        confirmar = input("Estas seguro(a) que deseas borrar la categoría? (Presiona 's' para confirmar o 'n' para cancelar)\n"
+                          "NOTA: También se borrarán las recetas almacenadas en dicha categoría.\n")
+
+        if confirmar == "s":
+            #La funcion rmdir() elimina una carpeta (o directorio)
+            categoria_a_eliminar.rmdir()
+            return print("Categoría eliminada con éxito.")
+        elif confirmar == "n":
+            return print("Operación cancelada.")
+
+        system("cls")
+        print("Por favor ingresa una opción válida.")
 
 #Aqui se mandan a llamar las funciones
 menu_principal(carpeta_base)
