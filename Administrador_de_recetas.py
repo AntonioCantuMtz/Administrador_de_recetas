@@ -4,7 +4,7 @@ from os import system
 
 total_de_recetas = 0
 
-print("Bienvenido al administrador de recetas")
+print("\U0001F373 Bienvenido al administrador de recetas \U0001F9C2")
 
 #Todas las carpetas y archivos que vayamos creando se almacenan en esta ruta
 carpeta_base = Path(Path.home(), "Recetas")
@@ -45,8 +45,10 @@ def menu_principal(carpeta_base1):
             system("cls")
             mostrar_categorias(carpeta_base1)
             categoria_ingresada = input("Ingresa el nombre de la categoría: ")
+            system("cls")
             nueva_ruta = mostrar_recetas(carpeta_base1, categoria_ingresada)
-            receta = input("Ingresa la receta que deseas ver (sin la extensión del archivo): ")
+            receta = input("Ingresa la receta que deseas ver: ")
+            system("cls")
             receta_seleccionada = receta + ".txt"
             leer_receta(nueva_ruta, receta_seleccionada)
 
@@ -85,7 +87,9 @@ def mostrar_categorias(carpeta_base1):
 
     #La funcion iterdir() imprime todas las carpetas hijo de la ruta principal <3
     for hijo in carpeta_base1.iterdir():
-        print(hijo)
+        #Aparentemente con stem no solo borramos la extension del archivo sino que tambien
+        #Borramos la ruta entera dejando solo el nombre del directorio o archivo :o
+        print(hijo.stem)
 
     print("\n")
 
@@ -93,7 +97,7 @@ def mostrar_recetas(carpeta_base1, categoria_ingresada):
     nueva_ruta = Path(carpeta_base1, categoria_ingresada)
 
     for archivo in nueva_ruta.glob("*.txt"):
-        print(archivo)
+        print(archivo.stem)
 
     return nueva_ruta
 
