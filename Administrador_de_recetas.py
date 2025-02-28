@@ -24,6 +24,7 @@ def menu_principal(carpeta_base1):
     opcion_del_menu = 0
 
     while opcion_del_menu != 6:
+
         print("Opciones del menú:\n"
               "1. Leer recetas\n"
               "2. Crear receta\n"
@@ -77,7 +78,7 @@ def menu_principal(carpeta_base1):
             eliminar_categoria(carpeta_base1, categoria_ingresada)
 
         elif opcion_ingresada == 6:
-            return print("Programa finalizado...")
+            return print("Programa finalizado...\nElaborado por: Anton Mtz \U0001F340")
         else:
             print("Esa opcion no existe. Favor de ingresar una opción valida.\n")
             system("cls")
